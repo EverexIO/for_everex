@@ -2,9 +2,14 @@
 const argv = require('optimist').argv;
 const getPrice = require('./src/get_price');
 
+var sum1=0, sum2=0;
+
 function offerToString(offer) {
+  let dec = Math.pow(10, 18);
   const pair = offer.pair.split('/');
-  return `${pair[0]} ${offer.payAmt} for ${pair[1]} ${offer.buyAmt}`;
+  sum1 += parseInt(offer.payAmt/dec);
+  sum2 += parseInt(offer.buyAmt/dec);
+  return `${parseInt(offer.payAmt/offer.buyAmt)} ${sum1} ${sum2} ${pair[0]} ${offer.payAmt/dec} for ${pair[1]} ${offer.buyAmt/dec}`;
 }
 
 async function f() {
